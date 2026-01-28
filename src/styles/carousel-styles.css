@@ -1,0 +1,153 @@
+/* src/styles/carousel-styles.css */
+
+/* Personalización del carrusel 3D para FCBCB */
+
+/* Contenedor principal del carrusel */
+.rootCarousel {
+  transform-style: preserve-3d;
+  perspective: 1300px;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Título de las tarjetas */
+.bigTitle {
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  max-width: 12rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  color: white !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+
+.bigTitle:hover {
+  color: #FBBF24 !important; /* Color ámbar de Tailwind */
+  text-decoration: underline;
+  text-decoration-color: #D97706 !important;
+}
+
+/* Contenedor del contenido */
+.content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: absolute;
+  bottom: 10%;
+  z-index: 20;
+  user-select: none;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  width: 100%;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+/* Descripción */
+.description {
+  max-width: 12rem;
+  font-size: 0.875rem;
+  color: #E5E7EB !important; /* gray-200 */
+  line-height: 1.25rem;
+}
+
+/* Contenedor de arrastre */
+.dragContainer {
+  position: relative;
+  display: flex;
+  margin: auto;
+  transform-style: preserve-3d;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Contenedor de giro (tarjetas) */
+.spinContainer {
+  width: 220px !important;
+  position: relative;
+  display: flex;
+  margin: auto;
+  transform-style: preserve-3d;
+  aspect-ratio: 0.67;
+}
+
+@media (min-width: 1500px) {
+  .spinContainer {
+    width: 280px !important;
+  }
+}
+
+/* Imágenes */
+.images {
+  background-size: cover;
+  border-radius: 0.75rem;
+  background-color: #4B5563; /* gray-600 como fallback */
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(251, 191, 36, 0.3); /* borde ámbar */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* Suelo (efecto 3D) */
+.ground {
+  width: 900px;
+  height: 900px;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(90deg);
+  background: radial-gradient(
+    circle at center,
+    rgba(212, 172, 13, 0.2), /* ámbra institucional */
+    transparent 70%
+  );
+}
+
+/* Efecto de resplandor para las tarjetas activas */
+.images::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    rgba(212, 172, 13, 0.4), 
+    rgba(26, 82, 118, 0.4), 
+    rgba(212, 172, 13, 0.4)
+  );
+  border-radius: 0.875rem;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Efecto hover en las imágenes */
+.images:hover {
+  transform: translateZ(20px) scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.images:hover::after {
+  opacity: 1;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .spinContainer {
+    width: 180px !important;
+  }
+  
+  .bigTitle {
+    font-size: 1rem;
+    max-width: 10rem;
+  }
+  
+  .description {
+    font-size: 0.75rem;
+    max-width: 10rem;
+  }
+}
