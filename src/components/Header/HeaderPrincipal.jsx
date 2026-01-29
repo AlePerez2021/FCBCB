@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // Importar logos 
-const LogoEscudoBolivia = "/public/LogoHome/logo_escudo_bolivia_0_0.png";
-const LogoFCBCB = "/public/LogoHome/logo-white.png";
+const LogoEscudoBolivia = "/LogoHome/logo_escudo_bolivia_0_0.png";
+const LogoFCBCB = "/LogoHome/logo-white.png";
 
 const HeaderPrincipal = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -30,7 +30,7 @@ const HeaderPrincipal = () => {
     <header className="w-full bg-white shadow-md">
       {/* Barra superior - Fondo blanco con buscador y tema */}
       <div className="bg-white border-b border-gray-200 py-3 px-4">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+        <div className="container mx-auto flex items-center justify-between">
           
           {/* Lado izquierdo: Texto institucional */}
           <div className="flex items-center mb-3 md:mb-0 w-full md:w-auto">
@@ -128,7 +128,7 @@ const HeaderPrincipal = () => {
         <div className="flex flex-col items-center justify-center">
           
           {/* Contenedor principal centrado */}
-          <div className="flex flex-col lg:flex-row items-center justify-center space-y-6 lg:space-y-0 lg:space-x-8 xl:space-x-12">
+          <div className="flex lg:flex-row items-center justify-between space-y-7 lg:space-y-0 lg:space-x-8 xl:space-x-12">
             
             {/* Logo Escudo Bolivia */}
             <div className="flex-shrink-0">
@@ -141,10 +141,10 @@ const HeaderPrincipal = () => {
 
             {/* Texto institucional CENTRADO */}
             <div className="text-center border-l-0 lg:border-l-4 lg:border-[#D4AC0D] lg:pl-8 border-r-0 lg:border-r-4 lg:border-[#D4AC0D] lg:pr-8">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-4xl md:text-6xl lg:text-5xl font-bold text-gray-900 leading-tight">
                 FUNDACIÓN CULTURAL
               </h1>
-              <div className="text-xl md:text-2xl lg:text-3xl text-gray-800 mt-1 font-semibold">
+              <div className="text-3xl md:text-2xl lg:text-5xl text-gray-800 mt-1 font-semibold">
                 Banco Central de Bolivia
               </div>
               <div className="text-amber-700 font-medium mt-2 text-lg md:text-xl">

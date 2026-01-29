@@ -322,26 +322,26 @@ const RepositoriosNacionales = () => {
       </div>
 
       {/* Estilos personalizados */}
-      <style jsx>{`
-        .slick-prev:before, .slick-next:before {
-          color: #f59e0b;
-          font-size: 30px;
-        }
-        .slick-dots li button:before {
-          font-size: 10px;
-          color: #f59e0b;
-        }
-        .slick-dots li.slick-active button:before {
-          color: #d97706;
-        }
-        @keyframes pulse-once {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.05); }
-        }
-        .animate-pulse-once {
-          animation: pulse-once 0.5s ease-in-out;
-        }
-      `}</style>
+<style>{`
+  .slick-prev:before, .slick-next:before {
+    color: #f59e0b;
+    font-size: 30px;
+  }
+  .slick-dots li button:before {
+    font-size: 10px;
+    color: #f59e0b;
+  }
+  .slick-dots li.slick-active button:before {
+    color: #d97706;
+  }
+  @keyframes pulse-once {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  .animate-pulse-once {
+    animation: pulse-once 0.5s ease-in-out;
+  }
+`}</style>
     </div>
   );
 };
