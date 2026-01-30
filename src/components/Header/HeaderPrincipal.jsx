@@ -29,7 +29,7 @@ const HeaderPrincipal = () => {
   return (
     <header className="w-full bg-white shadow-md">
       {/* Barra superior - Fondo blanco con buscador y tema */}
-      <div className="bg-white border-b border-gray-200 py-3 px-4">
+      <div className="bg-white border-b border-gray-200 py-2 px-4">
         <div className="container mx-auto flex items-center justify-between">
           
           {/* Lado izquierdo: Texto institucional */}
@@ -141,7 +141,7 @@ const HeaderPrincipal = () => {
 
             {/* Texto institucional CENTRADO */}
             <div className="text-center border-l-0 lg:border-l-4 lg:border-[#D4AC0D] lg:pl-8 border-r-0 lg:border-r-4 lg:border-[#D4AC0D] lg:pr-8">
-              <h1 className="text-4xl md:text-6xl lg:text-5xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-4xl md:text-4xl lg:text-5xl  text-gray-900 leading-tight">
                 FUNDACIÓN CULTURAL
               </h1>
               <div className="text-3xl md:text-2xl lg:text-5xl text-gray-800 mt-1 font-semibold">
@@ -168,7 +168,7 @@ const HeaderPrincipal = () => {
                 <div className="absolute inset-0 rounded-full border-4 border-amber-600/30 -z-10"></div>
                 
                 {/* Logo blanco sobre fondo negro */}
-                <div className="bg-black rounded-full p-3 flex items-center justify-center h-36 w-36 md:h-40 md:w-40">
+                <div className="bg-black rounded-full p-3 flex items-center justify-center h-36 w-36 md:h-30 md:w-30">
                   <img 
                     src={LogoFCBCB} 
                     alt="Logo Fundación Cultural BCB" 
@@ -178,12 +178,6 @@ const HeaderPrincipal = () => {
                 
                 {/* Anillo exterior decorativo */}
                 <div className="absolute -inset-2 rounded-full border-2 border-amber-500/20 pointer-events-none"></div>
-              </div>
-              
-              {/* Texto bajo el logo */}
-              <div className="text-center mt-3">
-                <div className="text-sm font-bold text-amber-800">FCBCB</div>
-                <div className="text-xs text-gray-600">Fundación Cultural</div>
               </div>
             </div>
           </div>

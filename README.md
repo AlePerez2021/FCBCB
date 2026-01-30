@@ -1,205 +1,203 @@
+Rediseño Fundación Cultural Banco Central de Bolivia - React-Vite TailwindCSS 🏛️
+https://github.com/user-attachments/assets/ejemplo-imagen-1
+https://github.com/user-attachments/assets/ejemplo-imagen-2
+https://github.com/user-attachments/assets/ejemplo-imagen-3
 
-# Coffee Shop 2 - React-Vite TailwindCSS Project ☕️
+Un rediseño moderno y responsive del sitio web de la Fundación Cultural del Banco Central de Bolivia, construido con React, Vite y Tailwind CSS. Este proyecto implementa las mejores prácticas en estructura de componentes, animaciones fluidas y experiencia de usuario optimizada.
 
-![Screenshot 2025-07-28 at 00 31 25](https://github.com/user-attachments/assets/fb885ac2-9e72-4630-a2f9-8e7e1dd526d6)
-![Screenshot 2025-07-28 at 00 32 10](https://github.com/user-attachments/assets/7775e932-35b6-4912-a5e9-46ec7bde2f52)
-![Screenshot 2025-07-28 at 00 32 32](https://github.com/user-attachments/assets/a4d2ebc3-abc2-433a-aa57-080d53d7ed8f)
-![Screenshot 2025-07-28 at 00 33 23](https://github.com/user-attachments/assets/05d561da-f8d3-4011-85f0-90c7014ee965)
+Demo en Vivo: https://fcbcb-rediseno.netlify.app/
 
----
+Tabla de Contenidos
+Resumen del Proyecto
 
-A modern, responsive coffee shop landing page built with React, Vite, and Tailwind CSS. This project demonstrates best practices in React component structure, animation, and UI/UX, making it a great template for learning, customization, and real-world use.
+Características Principales
 
-- **Live Demo:** [https://coffeelover-cafe.netlify.app/](https://coffeelover-cafe.netlify.app/)
+Stack Tecnológico
 
-*Note: View my Coffee Shop 1 template for another showcase of my design and development skills:*
+Estructura del Proyecto
 
-- **Live Demo:** [https://coffeeshop-arnob.vercel.app/](https://coffeeshop-arnob.vercel.app/)
-- **GitHub Repo:** [https://github.com/arnobt78/CoffeeShop-1--TailwindCSS-Fundamental-Project-7](https://github.com/arnobt78/CoffeeShop-1--TailwindCSS-Fundamental-Project-7)
+Componentes Principales
 
----
+Cómo Ejecutar
 
-## Table of Contents
+Personalización
 
-- [Project Summary](#project-summary)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Component Walkthrough](#component-walkthrough)
-- [How to Run](#how-to-run)
-- [How to Reuse Components](#how-to-reuse-components)
-- [Customization & Theming](#customization--theming)
-- [Keywords](#keywords)
-- [Conclusion](#conclusion)
+Palabras Clave
 
----
+Resumen del Proyecto
+Este proyecto consiste en el rediseño completo de la interfaz web de la Fundación Cultural del Banco Central de Bolivia, enfocándose en:
 
-## Project Summary
+Modernización visual manteniendo la identidad institucional
 
-Coffee Cafe is a visually appealing, single-page web app for a coffee shop. It features animated sections, a mobile-friendly layout, and reusable React components. The project is ideal for learning modern frontend development, rapid prototyping, or as a starting point for your own business site.
+Optimización responsive para todos los dispositivos
 
----
+Implementación de animaciones fluidas y profesionales
 
-## Features
+Mejora de UX/UI en la navegación y presentación de contenido
 
-- ⚡️ Fast development with Vite
-- 🎨 Styled with Tailwind CSS and custom fonts
-- 🌙 Dark mode support
-- ✨ Smooth animations using AOS (Animate On Scroll)
-- 📱 Responsive design for all devices
-- 🧩 Modular, reusable React components
-- 🏪 App store/Play store promo section
-- ⭐️ Testimonials slider
-- 📚 Clean, well-commented code
+Componentización modular para fácil mantenimiento
 
----
+Características Principales
+⚡️ Desarrollo rápido con Vite + React
 
-## Tech Stack
+🎨 Diseño institucional con paleta de colores BCB
 
-- **React** (18+)
-- **Vite** (for fast dev/build)
-- **Tailwind CSS** (utility-first styling)
-- **AOS** (scroll animations)
-- **React Slick** (testimonials slider)
-- **React Icons** (iconography)
-- **PostCSS** (with autoprefixer)
-- **ESLint** (code linting)
+🌙 Modo oscuro/claro integrado
 
----
+✨ Animaciones avanzadas con Framer Motion
 
-## Project Structure
+📱 Diseño responsive adaptativo (mobile/tablet/desktop)
 
-```bash
-coffee-cafe-main/
+🏛️ Sección del Consejo de Administración con diseño especial
+
+🎭 Efectos visuales profesionales con gradientes y sombras
+
+🔄 Optimización de imágenes y carga perezosa
+
+♿️ Accesibilidad y semántica HTML mejorada
+
+Stack Tecnológico
+React 18+ con Hooks y Componentes Funcionales
+
+Vite para build y desarrollo ultrarrápido
+
+Tailwind CSS con configuración personalizada
+
+Framer Motion para animaciones fluidas
+
+React Icons para iconografía
+
+ESLint + Prettier para calidad de código
+
+PostCSS con autoprefixer
+
+JavaScript ES6+ con mejores prácticas
+
+Estructura del Proyecto
+bash
+fcbcb-rediseno/
 ├── index.html
 ├── package.json
-├── postcss.config.js
-├── tailwind.config.js
 ├── vite.config.js
+├── tailwind.config.js
 ├── public/
-│   └── vite.svg
-├── src/
-│   ├── App.jsx
-│   ├── index.css
-│   ├── main.jsx
-│   ├── assets/
-│   │   └── ... (images, logos)
-│   └── components/
-│       ├── AppStore/
-│       ├── Banner/
-│       ├── Footer/
-│       ├── Hero/
-│       ├── Navbar/
-│       ├── Services/
-│       └── Testimonials/
-└── README.md
-```
+│   └── ... (imágenes y assets)
+└── src/
+    ├── App.jsx
+    ├── main.jsx
+    ├── index.css
+    ├── assets/
+    │   └── ... (recursos multimedia)
+    ├── components/
+    │   ├── Header/
+    │   ├── Navbar/
+    │   ├── Footer/
+    │   ├── ConsejoAdministracion/
+    │   └── ... (otros componentes)
+    ├── pages/
+    │   └── ... (páginas principales)
+    └── utils/
+        └── ... (utilidades y configuraciones)
+Componentes Principales
+ConsejoAdministracion
+Presentación visual de los miembros del Consejo
 
----
+Diseño responsive: rectangular en mobile, circular en desktop
 
-## Component Walkthrough
+Animaciones individuales por miembro
 
-### `Navbar`
+Sistema de colores según designación (BCB/Ministerio)
 
-- Displays logo and navigation links.
-- Uses Tailwind for layout and style.
-- Responsive and animated on scroll.
+HeaderPrincipal
+Header institucional con logo y branding
 
-### `Hero`
+Diseño adaptable a diferentes dispositivos
 
-- Main landing section with headline, call-to-action, and hero image.
-- Uses AOS for entrance animations.
+Navbar
+Navegación principal con menú responsive
 
-### `Services`
+Indicadores visuales de sección activa
 
-- Showcases coffee types/services in cards.
-- Data-driven: easily add new services.
-- Animated cards with hover effects.
+Footer
+Pie de página institucional con enlaces importantes
 
-### `Banner`
+Información de contacto y redes sociales
 
-- About/promo section with background image and feature highlights.
+MiembroCard
+Componente reutilizable para cada miembro del Consejo
 
-### `AppStore`
+Foto con efectos hover y animaciones
 
-- Promotes mobile app availability.
-- Includes Play Store and App Store badges.
+Información biográfica y designación
 
-### `Testimonials`
+Badges diferenciados por rol
 
-- Carousel/slider of customer reviews.
-- Uses `react-slick` for smooth sliding.
+Cómo Ejecutar
+Clonar el repositorio:
 
-### `Footer`
+bash
+git clone https://github.com/tu-usuario/fcbcb-rediseno.git
+Instalar dependencias:
 
-- Social links, navigation, and background image.
-- Responsive and styled for dark/light modes.
+bash
+npm install
+Iniciar servidor de desarrollo:
 
----
+bash
+npm run dev
+Abrir en el navegador:
 
-## How to Run
+Visitar: http://localhost:5173
 
-1. **Install dependencies:**
+Build para producción:
 
-   ```bash
-   npm install
-   ```
+bash
+npm run build
+Personalización
+Colores Institucionales
+Editar tailwind.config.js para modificar la paleta de colores:
 
-2. **Start the development server:**
+javascript
+theme: {
+  extend: {
+    colors: {
+      'bcb-primary': '#1E3A8A', // Azul BCB
+      'bcb-secondary': '#0F766E', // Verde institucional
+      'bcb-accent': '#F59E0B', // Amarillo destacado
+    }
+  }
+}
+Animaciones
+Modificar las configuraciones de Framer Motion en los componentes:
 
-   ```bash
-   npm run dev
-   ```
+javascript
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.8 }
+  }
+};
+Contenido
+Actualizar los datos de los miembros en ConsejoAdministracion.jsx:
 
-3. **Open your browser:**  
-   Visit the local URL shown in the terminal (usually <http://localhost:5173>).
+javascript
+const consejerosBCB = [
+  {
+    nombre: "Nombre Completo",
+    rol: "Cargo",
+    bio: "Biografía...",
+    imagen: importImagen,
+    designadoPor: "Banco Central de Bolivia"
+  }
+];
+Palabras Clave
+React, Vite, Tailwind CSS, Framer Motion, Fundación Cultural, Banco Central de Bolivia, Rediseño Web, UI/UX Moderna, Responsive Design, Animaciones Web, Componentes React, Desarrollo Frontend, JavaScript ES6+, Institutional Design, Accesibilidad Web, Performance Optimization
 
-4. **Build for production:**
+Conclusión
+Este proyecto representa una modernización completa de la presencia web institucional de la Fundación Cultural del Banco Central de Bolivia, combinando diseño profesional con tecnología moderna y mejores prácticas de desarrollo web.
 
-   ```sh
-   npm run build
-   ```
+Nota: Este proyecto es un rediseño conceptual y demostrativo. Para implementación oficial, contactar con las autoridades correspondientes del Banco Central de Bolivia.
 
----
-
-## How to Reuse Components
-
-Each component is self-contained and can be imported into other React projects:
-
-```jsx
-import Hero from './components/Hero/Hero';
-import Services from './components/Services/Services';
-// ...etc
-```
-
-- **Props:** Most components are data-driven. For example, to add a new service, edit the `ServicesData` array in `Services.jsx`.
-- **Styling:** All styles use Tailwind CSS classes, so you can easily adjust themes via `tailwind.config.js`.
-- **Assets:** Place your images in `src/assets/` and update import paths as needed.
-
----
-
-## Customization & Theming
-
-- **Colors & Fonts:** Edit `tailwind.config.js` to change primary/secondary colors or font families.
-- **Animations:** Adjust AOS settings in `App.jsx` or per component.
-- **Dark Mode:** Toggle dark mode by adding/removing the `dark` class on the `<body>` or root div.
-
----
-
-## Keywords
-
-React, Vite, Tailwind CSS, Coffee Shop, Landing Page, AOS, Animation, Responsive, Component, UI, Template, Modern, App Store, Testimonials, Slider, Dark Mode, Web Development, Frontend, JavaScript, Learning, Boilerplate
-
----
-
-## Conclusion
-
-This project is a great starting point for modern web development with React and Vite. Explore the code, customize the UI, and use the components in your own projects. Contributions and feedback are welcome!
-
----
-
-Happy coding! ☕️
-
-Thank you!
-
----
+Desarrollado con ❤️ para la cultura boliviana.
