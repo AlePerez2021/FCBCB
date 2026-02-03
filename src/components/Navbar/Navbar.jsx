@@ -444,11 +444,12 @@ const NavItem = ({ item, isMobile = false }) => {
         colorGroup={item.colorGroup}
         icon={item.icon}
         onClick={isMobile ? toggleMain : undefined}
-        className={`${isMobile ? "w-full justify-start" : "min-w-[100px]"} flex items-center justify-between`}
+        className={`${isMobile ? "w-full justify-stretch" : "w-[150px]"} flex items-center justify-center `}
+
       >
         <span>{item.name}</span>
-        <motion.span animate={openMain ? "open" : "closed"} variants={iconVariants} className="ml-2">
-          <FaChevronDown />
+        <motion.span animate={openMain ? "open" : "closed"} variants={iconVariants} className="ml-1">
+
         </motion.span>
       </DrawOutlineButton>
 
@@ -570,11 +571,10 @@ const Navbar = () => {
       <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white shadow-lg relative">
         <div className="container py-3 mx-auto px-4">
           <div className="flex justify-between items-center">
-            <div data-aos="fade-down" data-aos-once="true">
+
               <Link href="/" className="font-bold text-2xl sm:text-3xl flex items-center gap-2 tracking-wider">
                 <img src={Logo} alt="Logo" className="w-29 h-auto" />
               </Link>
-            </div>
 
             <div className="md:hidden">
               <LiquidMenuButton isOpen={isMenuOpen} onClick={toggleMenu} />
@@ -588,10 +588,7 @@ const Navbar = () => {
                   </li>
                 ))}
               </ul>
-
-              <div data-aos="fade-down" data-aos-once="true" data-aos-delay="600">
                 <AnimatedLoginButton>Login</AnimatedLoginButton>
-              </div>
             </div>
           </div>
         </div>
@@ -600,9 +597,9 @@ const Navbar = () => {
 
         {/* Mobile Sidebar */}
         {/* Mobile Sidebar - MODIFICADO PARA IZQUIERDA */}
-        <div className={`fixed inset-0 z-40 md:hidden transition-all duration-700 ${isMenuOpen ? 'visible' : 'invisible'}`}>
+        <div className={` fixed inset-0 z-40 md:hidden transition-all duration-700 ${isMenuOpen ? 'visible' : 'invisible'}`}>
           <div 
-            className={`absolute inset-0 bg-gradient-to-br from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-sm transition-all duration-700 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`}
+            className={` absolute inset-0 bg-gradient-to-br from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-sm transition-all duration-700 ${isMenuOpen ? 'opacity-100' : 'opacity-0'}`}
             onClick={closeMenu}
           />
 

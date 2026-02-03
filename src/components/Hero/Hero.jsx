@@ -6,6 +6,7 @@ import {
   FaChevronRight,
   FaStar
 } from 'react-icons/fa';
+import { ImagesSlider } from "../ui/Images-slider"; // Importa el componente
 
 // Función cn para combinar clases
 const cn = (...classes) => classes.filter(Boolean).join(' ');
@@ -71,7 +72,7 @@ const carouselData = [
     id: "3",
     title: "Archivo Biblioteca Nacional",
     description: "Guardian del patrimonio documental de Bolivia",
-    image: "/Repositorios/Archivo_Biblñioteca_Nacional_Bolivia.jpg"
+    image: "/Repositorios/Archivo_Biblioteca_Nacional_Bolivia.jpg"
   },
   {
     id: "4",
@@ -93,18 +94,19 @@ const carouselData = [
   }
 ];
 
-// Imágenes para el fondo (carrusel opaco)
+// Imágenes para el fondo con ImagesSlider
 const backgroundImages = [
   "/Repositorios/Casa_Moneda.jpg",
   "/Repositorios/Casa_Libertad.jpg",
   "/Repositorios/museo-etnografia-folklore.jpg",
-  "/Repositorios/museo-nacional-de-arte.jpg"
+  "/Repositorios/museo-nacional-de-arte.jpg",
+  "/Repositorios/centro_cultura_plurinacional.jpg"
 ];
 
 // Componente para partículas flotantes
 const FloatingParticles = ({ count = 25 }) => {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
       {[...Array(count)].map((_, i) => {
         const size = Math.random() * 6 + 2;
         const duration = Math.random() * 20 + 10;
@@ -157,50 +159,10 @@ const FloatingParticles = ({ count = 25 }) => {
   );
 };
 
-// Componente de fondo con carrusel de imágenes
-const BackgroundImageCarousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      {/* Imagen actual */}
-      <motion.div
-        key={currentIndex}
-        className="absolute inset-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.4 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 1.5 }}
-      >
-        <img
-          src={backgroundImages[currentIndex]}
-          alt="Patrimonio Cultural"
-          className="w-full h-full object-cover"
-          style={{
-            filter: 'sepia(10%) brightness(70%) contrast(110%)'
-          }}
-        />
-      </motion.div>
-
-      {/* Superposición de gradiente */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900/60 via-gray-900/30 to-gray-900/60" />
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/40 via-transparent to-gray-900/40" />
-    </div>
-  );
-};
-
 // Componente de animación de carga
 const LoadingAnimation = () => {
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-sm rounded-2xl">
+    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-sm rounded-2xl z-30">
       <div className="text-center">
         <div className="relative inline-block mb-4">
           <div className="w-16 h-16 border-4 border-amber-500/30 border-t-amber-400 rounded-full animate-spin"></div>
@@ -268,16 +230,29 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef}
-      className="relative min-h-[50vh] lg:min-h-[25vh] w-full overflow-hidden"
+      className="relative min-h-[50vh] lg:min-h-[80vh] w-full overflow-hidden bg-black"
     >
-      {/* Fondo con imágenes */}
-      <BackgroundImageCarousel />
+      {/* Fondo con ImagesSlider - ANIMACIÓN 3D DE IMÁGENES */}
+      <ImagesSlider
+        className="absolute inset-0"
+        images={backgroundImages}
+        overlay={true}
+        overlayClassName="bg-gradient-to-b from-gray-900/60 via-gray-900/30 to-gray-900/60"
+        autoplay={true}
+        direction="up"
+      >
+        {/* Contenido del slider (vacío, solo para estructura) */}
+        <div></div>
+      </ImagesSlider>
+
+      {/* Gradiente adicional para mejor contraste */}
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/40 via-transparent to-gray-900/40 z-5"></div>
 
       {/* Partículas flotantes */}
       <FloatingParticles count={20} />
 
       {/* Contenido principal - MOBILE: columna, DESKTOP: horizontal */}
-      <div className="relative z-20 container mx-auto px-4 py-12 md:py-16 lg:py-20">
+      <div className="relative z-0 container mx-auto px-4 py-12 md:py-16 lg:py-20">
         <div className="flex  lg:flex-row items-center justify-between gap-8 lg:gap-12">
           
           {/* TEXTO - En mobile va arriba, en desktop a la izquierda */}
@@ -293,8 +268,13 @@ const Hero = () => {
               </div>
             </Reveal>
 
-            {/* Título principal */}
-            <Reveal width="100%" delay={0.4}>
+            {/* Título principal con animación suave */}
+            <motion.div
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-4"
+            >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
                 <span className="block">PATRIMONIO</span>
                 <span className="block bg-gradient-to-r from-amber-300 via-amber-200 to-amber-100 bg-clip-text text-transparent">
@@ -304,7 +284,7 @@ const Hero = () => {
                   de Bolivia
                 </span>
               </h1>
-            </Reveal>
+            </motion.div>
 
             {/* Descripción */}
             <Reveal width="100%" delay={0.5}>
@@ -315,11 +295,10 @@ const Hero = () => {
               </p>
             </Reveal>
 
-
           </div>
 
           {/* CARRUSEL 3D - En mobile va abajo, en desktop a la derecha */}
-          <div className="w-full lg:w-7/12 xl:w-3/5 order-2 lg:order-2 mt-8 lg:mt-0 ">
+          <div className="w-full lg:w-7/12 xl:w-3/5 order-2 lg:order-2 mt-8 lg:mt-0">
             <div className={`relative ${getCarouselSize()} mx-auto lg:mx-0`}>
               
               {/* Animación de carga por 3 segundos */}

@@ -31,7 +31,7 @@ export const ProjectModal = (props) => {
         className="modal-card"
       >
         <img
-          className="modal-image"
+          className="modal-image h-[400px] object-cover"
           src={imgSrc}
           alt={`An image of the ${title} project.`}
         />

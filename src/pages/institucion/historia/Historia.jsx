@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
   FaLandmark, FaBook, FaUniversity, FaPalette, FaBuilding,
   FaMonument, FaPaintBrush, FaHistory, FaLeaf, FaCalendarAlt,
@@ -10,8 +10,21 @@ import HeaderPrincipal from '../../../components/Header/HeaderPrincipal';
 import Navbar from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
 import RepositoriosNacionales from '../../../components/Testimonials/RepositoriosNacionales';
+import { TracingBeam } from '../../../components/ui/TracingBeam';
+import { Timeline } from '../../../components/ui/TimeLine'; // Importa el componente Timeline
 
 const HistoriaInstitucion = () => {
+  const timelineRef = useRef(null);
+  
+  // Configurar scroll para la línea verde animada
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 20%", "end 80%"]
+  });
+
+  const scrollHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const scrollOpacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
+
   const eventosHistoricos = [
     {
       año: "1995",
@@ -104,104 +117,212 @@ El Centro de la Revolución Cultural, nueva dependencia de la FCBCB, creada como
 
 Finalmente, habiéndose promulgado la Ley N° 1231 y dando cumplimiento a sus disposiciones, en fecha 27 de septiembre de 2019, la Fundación Cultural del Banco Central de Bolivia recibió en propiedad la Casa Museo Marina Núñez del Prado y todos los bienes culturales que en ella se conservan, para su gestión y administración. La entrega se realizó de manos de don Gil Imaná, Presidente de la que fuera Fundación Núñez del Prado, en un acto administrativo con presencia de notario de fe pública. La FCBCB recibió en la gestión 2016 la oferta de transferencia a título gratuito de la Casa Museo Marina Núñez del Prado y de todos los bienes culturales que alberga, por parte de miembros del Directorio de la Fundación Marina Núñez bajo la Presidencia del artista Gil Imaná Garrón, institución que administró este repositorio hasta el cierre del museo hace más de 15 años. El Consejo de Administración de la FCBCB, en coordinación con el Directorio del BCB como su ente tutor, aceptó la transferencia mediante Resolución de Consejo de Administración, consolidándose la donación mediante Ley del Órgano Legislativo Plurinacional que declara patrimonio a la Casa Museo Marina Núñez y al conjunto de bienes culturales que la conforman, y establece su dependencia a la FCBCB.`;
 
+  const timelineData = eventosHistoricos.map(evento => ({
+    title: evento.año,
+    content: (
+      <div className="w-full max-w-none">
+        <div className="bg-white rounded-xl p-3 shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-[#10B981]/30">
+          <div className="flex flex-wrap md:flex-row items-start gap-0 ">
+            <div className={`p-4 rounded-xl bg-gradient-to-br ${evento.color} text-white flex-shrink-0 shadow-lg md:w-16 md:h-16 flex items-center justify-center`}>
+              {evento.icon}
+            </div>
+            <div className="flex-1">
+              <div className="flex flex-col md:flex-row md:items-center gap-3 mb-0">
+                <span className="text-2xl font-extrabold bg-gradient-to-r from-[#10B981] to-[#34D399] bg-clip-text text-transparent">
+                  {evento.año}
+                </span>
+                <h4 className="text-xl font-bold text-gray-800">
+                  {evento.evento}
+                </h4>
+              </div>
+              <p className="text-gray-700 text-base leading-relaxed">
+                {evento.descripcion}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }));
+
   return (
     <>
       <HeaderPrincipal />
       <Navbar />
       
-      <div className="min-h-screen pt-24 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4 py-12">
-          {/* Título principal */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Nuestra Historia Institucional
-            </h1>
-            <div className="w-24 h-1 bg-amber-500 mx-auto rounded-full"></div>
-          </motion.div>
+      {/* Sección principal con TracingBeam */}
+      <TracingBeam className="px-4 sm:px-6 lg:px-8 w-full">
+        <div className="min-h-screen pt-24 bg-gradient-to-b from-gray-50 to-white">
+          <div className="container mx-auto px-4 py-12 w-full">
+            {/* Título principal con efecto TracingBeam */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-16 max-w-4xl mx-auto"
+            >
+              <div className="inline-block mb-4">
+                <span className="bg-gradient-to-r from-[#3B82F6] to-[#10B981] text-white text-sm font-semibold px-4 py-2 rounded-full">
+                  Historia Institucional
+                </span>
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
+                Nuestra Historia
+              </h1>
+              <p className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto mb-8">
+                Conoce la trayectoria de la Fundación Cultural del Banco Central de Bolivia desde su creación
+              </p>
+              <div className="w-32 h-1 bg-gradient-to-r from-[#3B82F6] to-[#10B981] mx-auto rounded-full"></div>
+            </motion.div>
 
-          {/* Layout principal: Izquierda (foto + texto completo) | Derecha (timeline detallada) */}
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 xl:gap-16">
-            {/* Columna izquierda: Foto + Texto completo */}
-            <div className="lg:col-span-3 space-y-10">
-              {/* Foto principal */}
+            {/* Sección de foto y texto (ahora ocupa todo el ancho) */}
+            <div className="space-y-10 mb-20">
+              {/* Foto principal con animación */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="rounded-2xl overflow-hidden shadow-2xl border border-gray-200"
+                transition={{ duration: 0.8 }}
+                className="rounded-2xl overflow-hidden shadow-2xl border border-gray-200 max-w-4xl mx-auto"
               >
                 <img
-                  src="/public/Institucion/historia.jpg"  // ← cambia por tu imagen real
+                  src="/public/Institucion/historia.jpg"
                   alt="Patrimonio cultural FCBCB"
-                  className="w-full h-auto object-cover max-h-[500px]"
+                  className="w-full h-auto object-cover max-h-[500px] hover:scale-105 transition-transform duration-700"
                 />
               </motion.div>
 
-              {/* Texto completo */}
+              {/* Texto completo con animación de aparición */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="prose prose-lg max-w-none text-gray-700 leading-relaxed text-justify"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="max-w-4xl mx-auto"
               >
-                {textoHistoria.split('\n\n').map((parrafo, idx) => (
-                  <p key={idx} className="mb-6">
-                    {parrafo}
-                  </p>
-                ))}
+                <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 flex items-center gap-3">
+                    <FaHistory className="text-[#10B981]" />
+                    Reseña Histórica
+                  </h2>
+                  
+                  <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed text-justify space-y-6">
+                    {textoHistoria.split('\n\n').map((parrafo, idx) => (
+                      <motion.p
+                        key={idx}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 * idx + 0.3 }}
+                        className="text-gray-700 leading-relaxed"
+                      >
+                        {parrafo}
+                      </motion.p>
+                    ))}
+                  </div>
+                </div>
               </motion.div>
             </div>
 
-            {/* Columna derecha: Timeline más detallada y sticky */}
-            <div className="lg:col-span-2 lg:sticky lg:top-24 lg:h-fit">
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="relative pl-8 md:pl-10"
-              >
-                {/* Línea vertical */}
-                <div className="absolute left-4 md:left-5 top-0 bottom-0 w-0.5 bg-gradient-to-b from-amber-400 via-amber-500 to-amber-600"></div>
+            {/* Separador visual */}
+            <div className="my-16 max-w-4xl mx-auto">
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300"></div>
+                </div>
+                <div className="relative flex justify-center">
+                  <span className="bg-white px-4 text-gray-500">
+                    <FaCalendarAlt className="text-[#10B981] text-2xl" />
+                  </span>
+                </div>
+              </div>
+            </div>
 
-                {eventosHistoricos.map((evento, index) => (
+            {/* SECCIÓN DE TIMELINE COMPLETA */}
+            <div ref={timelineRef} className="max-w-6xl mx-auto">
+              {/* Cabecera de la timeline */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-12"
+              >
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                  Línea de Tiempo Histórica
+                </h2>
+                <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                  Eventos clave que marcaron el desarrollo institucional de la FC-BCB
+                </p>
+              </motion.div>
+
+              {/* Componente Timeline centrado y más ancho */}
+              <div className="relative">
+                {/* Línea vertical central animada (opcional) */}
+                <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1">
+                  <div className="absolute inset-0 w-1 bg-gradient-to-b from-gray-200 via-gray-300 to-gray-200"></div>
                   <motion.div
-                    key={evento.año}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.12 }}
-                    viewport={{ once: true }}
-                    className="relative mb-12 last:mb-0"
-                  >
-                    {/* Punto en la línea */}
-                    <div className="absolute left-[-10px] md:left-[-12px] top-3 w-6 h-6 rounded-full bg-white border-4 border-amber-500 shadow-md z-10"></div>
-                    
-                    {/* Tarjeta del evento */}
-                    <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200 hover:shadow-2xl transition-all duration-300">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className={`p-4 rounded-xl bg-gradient-to-br ${evento.color} text-white flex-shrink-0`}>
-                          {evento.icon}
-                        </div>
-                        <div>
-                          <div className="flex items-baseline gap-3">
-                            <span className="text-3xl font-extrabold text-amber-600">{evento.año}</span>
-                            <h4 className="text-xl font-bold text-gray-800">{evento.evento}</h4>
-                          </div>
-                          <p className="mt-2 text-gray-700 text-base leading-relaxed">
-                            {evento.descripcion}
-                          </p>
-                        </div>
-                      </div>
+                    style={{
+                      height: scrollHeight,
+                      background: "linear-gradient(to bottom, #10B98100 0%, #10B98180 30%, #10B981 50%, #10B98180 70%, #10B98100 100%)",
+                    }}
+                    className="absolute inset-x-0 top-0 w-1 rounded-full"
+                  />
+                </div>
+
+                {/* Timeline Component con contenedor más ancho */}
+                <div className="w-full">
+                  <Timeline 
+                    data={timelineData}
+                    title=""
+                    description=""
+                    showHeader={false}
+                    color="#10B981"
+                    glowColor="#10B98180"
+                  />
+                </div>
+              </div>
+
+              {/* Estadísticas después de la timeline */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+                className="mt-16 max-w-4xl mx-auto"
+              >
+                <div className="p-8 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100 shadow-lg">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center justify-center gap-3">
+                    <FaAward className="text-[#10B981]" />
+                    Logros Destacados
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div className="text-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                      <div className="text-3xl font-bold text-[#10B981] mb-2">8</div>
+                      <div className="text-sm font-medium text-gray-700">Repositorios Nacionales</div>
                     </div>
-                  </motion.div>
-                ))}
+                    <div className="text-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                      <div className="text-3xl font-bold text-[#059669] mb-2">25+</div>
+                      <div className="text-sm font-medium text-gray-700">Años de Trayectoria</div>
+                    </div>
+                    <div className="text-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                      <div className="text-3xl font-bold text-[#047857] mb-2">5</div>
+                      <div className="text-sm font-medium text-gray-700">Ciudades</div>
+                    </div>
+                    <div className="text-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                      <div className="text-3xl font-bold text-[#065F46] mb-2">1000+</div>
+                      <div className="text-sm font-medium text-gray-700">Eventos Culturales</div>
+                    </div>
+                  </div>
+                  <p className="text-center text-gray-600 text-sm mt-6">
+                    Una trayectoria de compromiso con la cultura boliviana
+                  </p>
+                </div>
               </motion.div>
             </div>
           </div>
         </div>
+      </TracingBeam>
+
+      {/* Sección de Repositorios Nacionales */}
+      <div className="mt-0">
+        <RepositoriosNacionales />
       </div>
-      <RepositoriosNacionales/>
+      
       <Footer />
     </>
   );

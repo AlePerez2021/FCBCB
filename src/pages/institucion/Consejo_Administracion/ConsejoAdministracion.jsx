@@ -3,6 +3,7 @@ import { motion, useAnimation, useInView } from 'framer-motion';
 import HeaderPrincipal from '../../../components/Header/HeaderPrincipal';
 import Navbar from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
+import { Boxes } from '../../../components/ui/BackgroundBoxes'; // Asegúrate de importar el componente Boxes
 
 // Importa las imágenes de los miembros
 import AlejandraImg from '../../../../public/presidencia/alejandra_echazu.jpeg';
@@ -13,6 +14,7 @@ import PaolaImg from '../../../../public/consejo/paola_claros.jpeg';
 import HomeroImg from '../../../../public/consejo/homero_carvalho.jpg';
 import GonzaloImg from '../../../../public/consejo/gonzalo_azurduy.jpeg';
 import RepositoriosNacionales from '../../../components/Testimonials/RepositoriosNacionales';
+import { TracingBeam } from '../../../components/ui/TracingBeam';
 
 const ConsejoAdministracion = () => {
   const titleRef = useRef(null);
@@ -515,53 +517,92 @@ const ConsejoAdministracion = () => {
       <HeaderPrincipal />
       <Navbar />
       
-      <div className="min-h-screen pt-20 sm:pt-24 bg-gradient-to-b from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
-          {/* Título principal - FIXED FOR MOBILE */}
-          <motion.div 
-            ref={titleRef} 
-            className="text-center mb-8 sm:mb-12 md:mb-16 px-2 sm:px-0"
+<div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-0">
+  {/* Hero section con Boxes - solo para el título */}
+  <div className="relative bg-slate-950 overflow-hidden">
+    {/* Boxes como background solo en esta sección */}
+    <Boxes className="absolute inset-0 z-0" />
+    
+    {/* Máscara radial para el efecto */}
+    <div
+      className="
+        absolute inset-0 z-10 pointer-events-none
+        bg-slate-950/60
+        [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black_70%)]
+      "
+    />
+    
+    {/* Contenido del hero */}
+    <div className="relative z-20 pt-20 sm:pt-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16">
+        {/* Título principal */}
+        <motion.div
+          ref={titleRef}
+          className="text-center mb-8 sm:mb-12 md:mb-16 px-2 sm:px-0"
+        >
+          <motion.h1
+            initial="hidden"
+            animate={titleControls}
+            variants={staggerContainer}
+            className="
+              text-3xl sm:text-4xl md:text-5xl lg:text-6xl 
+              font-bold mb-3 sm:mb-4 leading-tight
+            "
           >
-            <motion.h1
-              initial="hidden"
-              animate={titleControls}
-              variants={staggerContainer}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 leading-tight"
-            >
-              {titleChars.map(({ char, id, isSpace }) => (
-                <motion.span
-                  key={id}
-                  variants={letterAnimation}
-                  whileHover={{
-                    y: -10,
-                    scale: 1.2,
-                    transition: { duration: 0.3 }
-                  }}
-                  className={`inline-block mx-[0.05em] sm:mx-[0.1em] ${
-                    isSpace ? 'w-2 sm:w-3 md:w-4' : ''
-                  } text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 dark:from-blue-400 dark:via-purple-400 dark:to-blue-600`}
-                >
-                  {char}
-                </motion.span>
-              ))}
-            </motion.h1>
-            
-            <motion.div
-              initial={{ width: 0, opacity: 0 }}
-              animate={{ width: "120px", opacity: 1 }}
-              transition={{ delay: 1.2, duration: 1.5, ease: "easeOut" }}
-              className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 mx-auto rounded-full mt-3 sm:mt-4"
-            />
-            
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 0.8 }}
-              className="text-gray-600 dark:text-gray-300 mt-4 sm:mt-6 text-sm sm:text-base md:text-lg max-w-3xl mx-auto px-2"
-            >
-              Máxima autoridad de la Fundación Cultural del Banco Central de Bolivia
-            </motion.p>
-          </motion.div>
+            {titleChars.map(({ char, id, isSpace }) => (
+              <motion.span
+                key={id}
+                variants={letterAnimation}
+                whileHover={{
+                  y: -10,
+                  scale: 1.2,
+                  transition: { duration: 0.3 }
+                }}
+                className={`
+                  inline-block mx-[0.05em] sm:mx-[0.1em]
+                  ${isSpace ? 'w-2 sm:w-3 md:w-4' : ''}
+                  text-transparent bg-clip-text 
+                  bg-amber-400
+                  dark:from-blue-300 dark:via-purple-300 dark:to-indigo-300
+                `}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </motion.h1>
+
+          {/* Línea decorativa animada */}
+          <motion.div
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: "140px", opacity: 1 }}
+            transition={{ delay: 1.2, duration: 1.5, ease: "easeOut" }}
+            className="
+              h-1 bg-gradient-to-r 
+              from-amber-400 via-yellow-400 to-amber-500 
+              mx-auto rounded-full mt-4 sm:mt-5 shadow-md
+            "
+          />
+
+          {/* Subtítulo */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
+            className="
+              text-gray-300 dark:text-gray-300 
+              mt-5 sm:mt-7 text-base sm:text-lg md:text-xl 
+              max-w-3xl mx-auto px-2
+              drop-shadow-sm
+            "
+          >
+            Máxima autoridad de la Fundación Cultural del Banco Central de Bolivia
+          </motion.p>
+        </motion.div>
+      </div>
+    </div>
+  </div>
+  <TracingBeam className="w-full px-4">
+   <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
 
           {/* Sección introductoria - FIXED FOR MOBILE */}
           <motion.div
@@ -571,6 +612,7 @@ const ConsejoAdministracion = () => {
             animate={introControls}
             className="bg-white dark:bg-gray-900 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl p-4 sm:p-6 md:p-8 lg:p-12 mb-8 sm:mb-12 md:mb-16 border border-gray-200 dark:border-gray-800"
           >
+            
             <div className="mb-6 sm:mb-8 relative overflow-hidden">
               <motion.h2
                 variants={textReveal}
@@ -583,7 +625,7 @@ const ConsejoAdministracion = () => {
                   initial={{ backgroundSize: "0% 3px" }}
                   animate={{ backgroundSize: "100% 3px" }}
                   transition={{ duration: 1.2, delay: 0.5 }}
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 bg-no-repeat bg-left-bottom bg-[length:0%_3px] pb-1"
+                  className="bg-gradient-to-r from-blue-500 to-amber-600 bg-no-repeat bg-left-bottom bg-[length:0%_3px] pb-1"
                 >
                   Estructura y Funciones del Consejo
                 </motion.span>
@@ -699,7 +741,7 @@ const ConsejoAdministracion = () => {
                 >
                   <span className="relative">
                     <motion.span 
-                      className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent"
+                      className="bg-amber-700 bg-clip-text text-transparent"
                       animate={{ 
                         backgroundPosition: ["0%", "100%"],
                       }}
@@ -718,7 +760,7 @@ const ConsejoAdministracion = () => {
                       initial={{ width: 0 }}
                       animate={{ width: "100%" }}
                       transition={{ delay: 0.8, duration: 1.5, ease: "easeOut" }}
-                      className="absolute -bottom-2 left-0 h-0.5 sm:h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 rounded-full"
+                      className="absolute -bottom-2 left-0 h-0.5 sm:h-1 bg-gradient-to-r from-amber-200  to-amber-400 rounded-full"
                     />
                   </span>
                 </motion.h2>
@@ -762,7 +804,7 @@ const ConsejoAdministracion = () => {
                 >
                   <span className="relative">
                     <motion.span 
-                      className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent"
+                      className="bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent "
                       animate={{ 
                         backgroundPosition: ["0%", "100%"],
                       }}
@@ -781,7 +823,7 @@ const ConsejoAdministracion = () => {
                       initial={{ width: 0 }}
                       animate={{ width: "100%" }}
                       transition={{ delay: 0.8, duration: 1.5, ease: "easeOut" }}
-                      className="absolute -bottom-2 left-0 h-0.5 sm:h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"
+                      className="absolute -bottom-2 left-0 h-0.5 sm:h-1 bg-gradient-to-r from-blue-500 to-blue-600 dark:text-white  rounded-full"
                     />
                   </span>
                 </motion.h2>
@@ -792,7 +834,7 @@ const ConsejoAdministracion = () => {
                   className="flex items-center justify-center gap-2 mt-3 sm:mt-4"
                 >
                   <motion.div 
-                    className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-blue-500"
+                    className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-blue-500 text-center items-center justify-center"
                     animate={{ 
                       rotate: 360,
                       scale: [1, 1.2, 1]
@@ -880,7 +922,9 @@ const ConsejoAdministracion = () => {
             </motion.div>
           </motion.div>
         </div>
+              </TracingBeam>
       </div>
+
       <RepositoriosNacionales/>
       <Footer />
     </>
